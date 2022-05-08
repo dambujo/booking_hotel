@@ -5,3 +5,5 @@ const router = Router();
 
 router.post('/auth/signin', authController.signIn);
 router.post('/auth/change-password', authController.changePassword);
+
+export default router;
