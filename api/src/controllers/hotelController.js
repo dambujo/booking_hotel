@@ -1,34 +1,62 @@
 import userService from '../services/userService';
+import Hotel from '../models/Hotel';
 
-const getAllHotels = (req, res) => {
-  const allUsers = userService.getAllUsers();
-  res.send('Get all hotels');
+const getAllHotels = async (req, res) => {
+  try {
+    const hotels = await Hotel.find(req.params.id);
+    res.status(200).json(hotels);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
-const getOneHotel = (req, res) => {
-  const user = userService.getOneUser();
-  res.send('Get an existing hotel');
+const getOneHotel = async (req, res) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    res.status(200).json(hotel);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
-const createNewHotel = (req, res) => {
-  const createdNewUser = userService.createNewUser();
-  res.send('Create a new hotel');
+const createNewHotel = async (req, res) => {
+  const newHotel = new Hotel(req.body);
+  try {
+    const savedHotel = await newHotel.save();
+    res.status(200).json(savedHotel);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
-const updateOneHotel = (req, res) => {
-  const updatedOneUser = userService.updateOneUser();
-  res.send('Update an existing hotel');
+const updateHotel = async (req, res) => {
+  try {
+    const updatedHotel = await Hotel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true },
+    );
+    res.status(200).json(updatedHotel);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
-const deleteOneHotel = (req, res) => {
-  const deletedOneUser = userService.deleteOneUser();
-  res.send('Delete an existing hotel');
+const deleteOneHotel = async (req, res) => {
+  try {
+    await Hotel.findByIdAndDelete(req.params.id);
+    res.status(200).json('Hotel has been deleted');
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 export default {
   getAllHotels,
   getOneHotel,
   createNewHotel,
-  updateOneHotel,
+  updateHotel,
   deleteOneHotel,
 };

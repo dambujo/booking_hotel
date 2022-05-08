@@ -1,3 +1,5 @@
+import Hotel from '../models/Hotel';
+
 const getAllHotels = () => {
   return;
 };
@@ -7,7 +9,7 @@ const getOneHotel = () => {
 };
 
 const createNewHotel = () => {
-  return;
+  const newHotel = new Hotel(req.body);
 };
 
 const updateOneHotel = () => {

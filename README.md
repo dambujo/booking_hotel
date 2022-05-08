@@ -1,1 +1,1 @@
-# Booking Hotels Application
+# Booking Hotel

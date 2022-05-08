@@ -5,12 +5,12 @@ const router = Router();
 
 router.get('/', hotelController.getAllHotels);
 
-router.get('/:hotelId', hotelController.getOneHotel);
+router.get('/:id', hotelController.getOneHotel);
 
 router.post('/', hotelController.createNewHotel);
 
-router.patch('/:hotelId', hotelController.createNewHotel);
+router.patch('/:id', hotelController.updateHotel);
 
-router.delete('/:hotelId', hotelController.deleteOneHotel);
+router.delete('/:id', hotelController.deleteOneHotel);
 
 export default router;

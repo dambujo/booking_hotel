@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.SERVER_PORT;
 
 app.use(bodyParser.json());
+app.use(express.json());
 app.use('/', v1Router);
 
 app.listen(PORT, () => {
